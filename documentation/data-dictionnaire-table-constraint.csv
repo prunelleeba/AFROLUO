@@ -1,0 +1,49 @@
+"table_name","ordinal_position","column_name","data_type","is_nullable","column_default","constraint_type"
+"contenus",1,"id","integer","NO",NULL,"PRIMARY KEY"
+"contenus",2,"langue_source_id","integer","NO",NULL,"FOREIGN KEY"
+"contenus",3,"type_contenu_id","integer","NO",NULL,"FOREIGN KEY"
+"contenus",4,"theme_id","integer","YES",NULL,"FOREIGN KEY"
+"contenus",5,"texte_source","text","NO",NULL,NULL
+"contenus",6,"prononciation","text","YES",NULL,NULL
+"contenus",7,"niveau","integer","YES","1",NULL
+"contenus",8,"audio_fichier","text","YES",NULL,NULL
+"contenus",9,"actif","boolean","YES","true",NULL
+"contenus_traductions",1,"contenu_id","integer","NO",NULL,"FOREIGN KEY"
+"contenus_traductions",1,"contenu_id","integer","NO",NULL,"PRIMARY KEY"
+"contenus_traductions",2,"langue_id","integer","NO",NULL,"FOREIGN KEY"
+"contenus_traductions",2,"langue_id","integer","NO",NULL,"PRIMARY KEY"
+"contenus_traductions",3,"traduction","text","NO",NULL,NULL
+"contenus_traductions",4,"exemple","text","YES",NULL,NULL
+"contenus_variantes",1,"id","bigint","NO","nextval('contenus_variantes_id_seq'::regclass)","PRIMARY KEY"
+"contenus_variantes",2,"contenu_id","integer","NO",NULL,"FOREIGN KEY"
+"contenus_variantes",3,"langue_id","integer","NO",NULL,"FOREIGN KEY"
+"contenus_variantes",4,"variante","text","NO",NULL,NULL
+"contenus_variantes",5,"note","text","YES",NULL,NULL
+"langues",1,"id","integer","NO",NULL,"PRIMARY KEY"
+"langues",2,"code","text","NO",NULL,"UNIQUE"
+"langues",3,"nom","text","NO",NULL,NULL
+"progression",1,"utilisateur_id","integer","NO",NULL,"PRIMARY KEY"
+"progression",1,"utilisateur_id","integer","NO",NULL,"FOREIGN KEY"
+"progression",2,"contenu_id","integer","NO",NULL,"PRIMARY KEY"
+"progression",2,"contenu_id","integer","NO",NULL,"FOREIGN KEY"
+"progression",3,"nb_bonnes_reponses","integer","YES","0",NULL
+"progression",4,"nb_mauvaises_reponses","integer","YES","0",NULL
+"progression",5,"derniere_vue","date","YES",NULL,NULL
+"progression",6,"prochaine_revision","date","YES",NULL,NULL
+"progression",7,"intervalle_jours","integer","YES","1",NULL
+"themes",1,"id","integer","NO",NULL,"PRIMARY KEY"
+"themes",2,"code","text","NO",NULL,"UNIQUE"
+"themes",3,"ordre","integer","NO",NULL,NULL
+"themes_traductions",1,"theme_id","integer","NO",NULL,"PRIMARY KEY"
+"themes_traductions",1,"theme_id","integer","NO",NULL,"FOREIGN KEY"
+"themes_traductions",2,"langue_id","integer","NO",NULL,"FOREIGN KEY"
+"themes_traductions",2,"langue_id","integer","NO",NULL,"PRIMARY KEY"
+"themes_traductions",3,"nom","text","NO",NULL,NULL
+"types_contenu",1,"id","integer","NO",NULL,"PRIMARY KEY"
+"types_contenu",2,"code","text","NO",NULL,"UNIQUE"
+"types_contenu",3,"libelle","text","NO",NULL,NULL
+"utilisateurs",1,"id","integer","NO",NULL,"PRIMARY KEY"
+"utilisateurs",2,"nom","text","NO",NULL,NULL
+"utilisateurs",3,"email","text","YES",NULL,"UNIQUE"
+"utilisateurs",4,"langue_id","integer","NO",NULL,"FOREIGN KEY"
+"utilisateurs",5,"password","text","YES",NULL,NULL
