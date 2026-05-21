@@ -48,6 +48,7 @@ class WelcomePage extends StatelessWidget {
                 backgroundColor: WidgetStateProperty.all(AppColors.grey100),
               ),
               onPressed: () {
+                Navigator.pushNamed(context, "/login");
               },
               child: Text(
                 "DEJA UN COMPTE ?",

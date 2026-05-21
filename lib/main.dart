@@ -1,22 +1,17 @@
+import 'package:afroduo/core/services/chat_service.dart';
 import 'package:afroduo/features/auth/firstPage.dart';
 import 'package:afroduo/routes/app_router.dart';
 import 'package:flutter/material.dart';
 import 'core/theme/app_theme.dart';
 
-void main() {
-  // runApp(const MyApp());
-   ErrorWidget.builder = (FlutterErrorDetails details) {
-    return Container(
-      color: Colors.red,
-      child: Center(
-        child: Text(
-          'Erreur: ${details.exception}',
-          style: TextStyle(color: Colors.white),
-        ),
-      ),
-    );
+Future<void> main() async {
+ FlutterError.onError = (FlutterErrorDetails details) {
+    FlutterError.presentError(details);
+    debugPrint(details.exceptionAsString());
   };
-  runApp(MyApp());
+  // WidgetsFlutterBinding.ensureInitialized();
+  // await ChatService.initialize();   // ← chargement du dictionnaire
+  // runApp(const MyApp());
 }
  
 class MyApp extends StatelessWidget {

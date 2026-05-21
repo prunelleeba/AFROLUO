@@ -13,6 +13,10 @@ class TopBarWidget extends StatelessWidget {
         Container(
           decoration: BoxDecoration(
             shape: BoxShape.circle,
+            image: const DecorationImage(
+              image: AssetImage("assets/images/logo/afrique.jpg"),
+              fit: BoxFit.cover,
+            ),
             border: Border.all(color: Colors.white, width: 2),
           ),
           child: CircleAvatar(
@@ -32,10 +36,10 @@ class TopBarWidget extends StatelessWidget {
             fontSize: 18,
           ),
         ),
-         SizedBox(width: 50),
- _buildStat(Icons.local_fire_department, "12", Colors.orange),
-            _buildStat(Icons.diamond, "450", const Color.fromARGB(255, 182, 224, 243)),
-            _buildStat(Icons.favorite, "5", Colors.red),
+//          SizedBox(width: 50),
+//  _buildStat(Icons.local_fire_department, "12", Colors.orange),
+//             _buildStat(Icons.diamond, "450", const Color.fromARGB(255, 182, 224, 243)),
+//             _buildStat(Icons.favorite, "5", Colors.red),
           
         
        

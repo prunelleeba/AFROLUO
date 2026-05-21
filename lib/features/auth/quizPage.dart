@@ -19,10 +19,13 @@ class _QuizScreenState extends State<QuizScreen> {
     title: "Quelle langue voulez-vous apprendre ?",
       image: "assets/images/avatars/lion_moulle.png",
       options: [
-        QuizOption(label: "English", imagePath: "assets/images/flags/Engleterre.png"),
-        QuizOption(label: "Français", imagePath: "assets/images/flags/france.png"),
-        QuizOption(label: "Allemand", imagePath: "assets/images/flags/Allemagne.png"),
         QuizOption(label: "Ewondo", imagePath: "assets/images/flags/Cameroon.png"),
+        QuizOption(label: "Ndemli", imagePath: "assets/images/flags/Cameroon.png"),
+        QuizOption(label: "Duala", imagePath: "assets/images/flags/Cameroon.png"),
+        QuizOption(label: "Ngiemboon", imagePath: "assets/images/flags/Cameroon.png"),
+        QuizOption(label: "Yemba", imagePath: "assets/images/flags/Cameroon.png"),
+        QuizOption(label: "Foufoulde", imagePath: "assets/images/flags/Cameroon.png"),
+        
       ],
     ),  
      Question(
@@ -31,8 +34,6 @@ class _QuizScreenState extends State<QuizScreen> {
       options: [
         QuizOption(label: "English", imagePath: "assets/images/flags/Engleterre.png"),
         QuizOption(label: "Français", imagePath: "assets/images/flags/france.png"),
-        QuizOption(label: "Allemand", imagePath: "assets/images/flags/Allemagne.png"),
-        QuizOption(label: "Ewondo", imagePath: "assets/images/flags/Cameroon.png"),
       ],
     ), 
     Question(
@@ -97,7 +98,7 @@ class _QuizScreenState extends State<QuizScreen> {
           setState(() => currentIndex++); // Avance à la question suivante
         } else {
           // Naviguer vers la page de fin (Succès)
-          Navigator.pushNamed(context, '/home');
+          Navigator.pushNamed(context, '/register');
         }
       },
 
