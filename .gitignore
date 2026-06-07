@@ -1,0 +1,47 @@
+# ══════════════════════════════════════════════════════════════
+#  .gitignore — Fichiers à NE PAS committer sur GitHub
+# ══════════════════════════════════════════════════════════════
+
+# Variables d'environnement (SECRETS !)
+.env
+.env.local
+.env.production
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+.eggs/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Virtual environments
+venv/
+env/
+.venv/
+
+# Uploads (fichiers audio/images des utilisateurs)
+uploads/audio/*.mp3
+uploads/audio/*.ogg
+uploads/audio/*.wav
+uploads/avatars/
+
+# Docker
+.docker/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
+logs/
+
+# Alembic versions (optionnel — certains les committent)
+# alembic/versions/
