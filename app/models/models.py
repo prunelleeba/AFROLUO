@@ -205,11 +205,17 @@ class SessionApprentissage(Base):
     utilisateur_id = Column(Integer, ForeignKey("utilisateurs.id", ondelete="CASCADE"), nullable=False)
     langue_id      = Column(Integer, ForeignKey("langues.id"))
     theme_id       = Column(Integer, ForeignKey("themes.id"))
-    nb_total       = Column(Integer, default=0)    # Total de questions dans la session
-    nb_correct     = Column(Integer, default=0)    # Bonnes réponses
+    nb_mots_vus          = Column(Integer, default=0)
+    nb_bonnes_reponses   = Column(Integer, default=0)
+    nb_mauvaises_reponses = Column(Integer, default=0)
+    score                = Column(Integer, default=0)
+    type_session         = Column(Text)
+    date_debut           = Column(DateTime(timezone=True), server_default=func.now())
+    date_fin             = Column(DateTime(timezone=True))
+    
     duree_secondes = Column(Integer)               # Durée de la session
     created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
-    updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now(), nullable=False)
+    
 
     utilisateur = relationship("Utilisateur", back_populates="sessions")
     langue      = relationship("Langue")

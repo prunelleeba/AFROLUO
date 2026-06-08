@@ -229,3 +229,87 @@ Les tables créées automatiquement par SQLAlchemy correspondent exactement :
 - ✅ Code commenté et pédagogique
 - ✅ Gestion des erreurs robuste
 - ✅ Support audio pour la prononciation
+
+## 🚀 Installation rapide
+
+### 1. Prérequis
+- Anaconda
+- PostgreSQL 18
+- Python 3.11
+
+### 2. Cloner et installer
+```bash
+conda create -n afroluo_env python=3.11
+conda activate afroluo_env
+pip install -r requirements.txt
+```
+
+### 3. Configurer la base de données
+```bash
+# Créer la base dans pgAdmin : afroluo_db
+# Puis importer le fichier SQL :
+psql -U postgres -d afroluo_db -f Afroduo.sql
+```
+
+### 4. Configurer l'environnement
+```bash
+# Copier le fichier exemple
+cp .env.example .env
+# Puis modifier .env avec vos vrais identifiants
+```
+
+### 5. Lancer le serveur
+```bash
+uvicorn main:app --reload --host 0.0.0.0 --port 8000
+```
+
+### 6. Tester les API
+Ouvrir : http://localhost:8000/docs
+
+## 📋 Endpoints disponibles
+
+| Méthode | URL | Description |
+|---------|-----|-------------|
+| POST | /api/v1/register | Créer un compte |
+| POST | /api/v1/login | Se connecter |
+| POST | /api/v1/forgot-password | Demander un OTP |
+| POST | /api/v1/verify-otp | Vérifier le code OTP |
+| POST | /api/v1/reset-password | Réinitialiser le mot de passe |
+| DELETE | /api/v1/profile | Supprimer son compte |
+
+## 🔑 Configuration de la connexion Google
+
+### Pourquoi c'est nécessaire ?
+Les identifiants Google OAuth sont personnels et liés à un compte Google Cloud.
+Chaque développeur doit créer ses propres identifiants.
+
+### Étapes pour créer tes propres identifiants Google :
+
+1. Va sur https://console.cloud.google.com
+2. Crée un nouveau projet appelé "AfroLuo"
+3. Dans le menu → APIs et services → Écran de consentement OAuth
+   - Type : Externe
+   - Nom : AfroLuo
+   - Email : ton email
+4. Dans APIs et services → Identifiants
+   - Clique "Créer des identifiants" → "ID client OAuth"
+   - Type : Application Web
+   - URI de redirection autorisé : http://localhost:8000/api/v1/auth/google/callback
+5. Copie le CLIENT_ID et CLIENT_SECRET
+6. Dans Audience → Ajoute ton email comme utilisateur test
+7. Mets à jour ton fichier .env :
+
+GOOGLE_CLIENT_ID=ton_client_id
+GOOGLE_CLIENT_SECRET=ton_client_secret
+GOOGLE_REDIRECT_URI=http://localhost:8000/api/v1/auth/google/callback
+
+### Comment tester la connexion Google ?
+Ouvre ton navigateur (pas Postman) et va sur :
+http://localhost:8000/api/v1/auth/google
+
+Tu seras redirigé vers Google → connecte-toi → tu recevras ton token JWT AfroLuo.
+
+### ⚠️ Important
+- Ne jamais mettre CLIENT_ID et CLIENT_SECRET sur GitHub
+- Le fichier .env est protégé par .gitignore
+- En production, remplacer localhost:8000 par ton vrai domaine

@@ -12,7 +12,7 @@ ROUTES :
 
 from fastapi import APIRouter, Depends, HTTPException, status, UploadFile, File
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy import select
+from sqlalchemy import select, delete as sql_delete
 import aiofiles
 import os
 import uuid
@@ -23,6 +23,8 @@ from app.models.models import Utilisateur
 from app.schemas.schemas import UserResponse, UserUpdateRequest, ChangePasswordRequest
 from app.core.security import get_current_user, hash_password, verify_password
 from app.core.config import settings
+from app.schemas.otp_schemas import DeleteAccountRequest
+from app.models.otp_model import OTPCode
 
 router = APIRouter()
 
@@ -151,3 +153,34 @@ async def upload_avatar(
     await db.flush()
 
     return UserResponse.model_validate(current_user)
+@router.delete(
+    "/profile",
+    status_code=status.HTTP_200_OK,
+    summary="Supprimer mon compte"
+)
+async def supprimer_compte(
+    request: DeleteAccountRequest,
+    current_user: Utilisateur = Depends(get_current_user),
+    db: AsyncSession = Depends(get_db)
+):
+    """Supprime le compte définitivement après confirmation du mot de passe."""
+
+    # Vérifier le mot de passe
+    if not verify_password(request.mot_de_passe, current_user.password or ""):
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Mot de passe incorrect. Suppression annulée."
+        )
+
+    # Supprimer les OTP liés
+    await db.execute(
+        sql_delete(OTPCode).where(OTPCode.utilisateur_id == current_user.id)
+    )
+
+    # Supprimer le compte (CASCADE supprime progression + sessions)
+    await db.delete(current_user)
+    await db.commit()
+
+    return {
+        "message": "Votre compte a été supprimé définitivement. Au revoir ! 👋"
+    }

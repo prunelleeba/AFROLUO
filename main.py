@@ -18,7 +18,8 @@ import logging
 
 from app.core.config import settings
 from app.db.database import engine, Base
-from app.api.routes import auth, users, languages, lessons, quiz, progress, audio
+from app.api.routes import auth, users, languages, lessons, quiz, progress, audio, password_reset, google_auth
+
 
 # ─────────────────────────────────────────────
 # LOGGING — pour voir ce qui se passe dans le terminal
@@ -95,6 +96,8 @@ app.include_router(lessons.router,   prefix="/api/v1", tags=["📚 Lessons"])
 app.include_router(quiz.router,      prefix="/api/v1", tags=["🧠 Quiz"])
 app.include_router(progress.router,  prefix="/api/v1", tags=["📈 Progress"])
 app.include_router(audio.router,     prefix="/api/v1", tags=["🔊 Audio"])
+app.include_router(password_reset.router, tags=["🔑 Password Reset"])
+app.include_router(google_auth.router)
 
 
 # ─────────────────────────────────────────────
