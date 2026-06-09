@@ -1,4 +1,5 @@
 import 'package:afroduo/core/theme/app_colors.dart';
+import 'package:afroduo/core/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 
 class WelcomePage extends StatelessWidget {
@@ -18,7 +19,7 @@ class WelcomePage extends StatelessWidget {
             ),
             const SizedBox(height: 11),
             Image.asset(
-              "assets/images/avatars/lion_app.png",
+              "assets/images/avatars/liodebut.png",
               width: 200,
               height: 200,
             ),
@@ -35,12 +36,11 @@ class WelcomePage extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 15),
-            ElevatedButton(
+            GradientButton(
+              label: "COMMENCER",
               onPressed: () {
-                               Navigator.pushNamed(context, "/start");
-
+                Navigator.pushNamed(context, "/start");
               },
-              child: const Text("COMMENCER"),
             ),
             const SizedBox(height: 15),
             ElevatedButton(
@@ -53,7 +53,7 @@ class WelcomePage extends StatelessWidget {
               child: Text(
                 "DEJA UN COMPTE ?",
                 style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                  color: AppColors.secondaryBlue,
+                  color: AppColors.primaryBlue,
                 ),
               ),
             ),

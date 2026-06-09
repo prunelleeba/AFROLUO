@@ -1,4 +1,5 @@
 // lib/features/auth/register_page.dart
+import 'package:afroduo/core/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:afroduo/core/theme/app_colors.dart';
 
@@ -9,7 +10,8 @@ class RegisterPage extends StatefulWidget {
   State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _RegisterPageState extends State<RegisterPage> with SingleTickerProviderStateMixin {
+class _RegisterPageState extends State<RegisterPage>
+    with SingleTickerProviderStateMixin {
   final _formKey = GlobalKey<FormState>();
   final _nameCtrl = TextEditingController();
   final _emailCtrl = TextEditingController();
@@ -21,7 +23,10 @@ class _RegisterPageState extends State<RegisterPage> with SingleTickerProviderSt
   @override
   void initState() {
     super.initState();
-    _animController = AnimationController(vsync: this, duration: const Duration(milliseconds: 800));
+    _animController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 800),
+    );
     _fadeAnim = CurvedAnimation(parent: _animController, curve: Curves.easeIn);
     _animController.forward();
   }
@@ -59,7 +64,7 @@ class _RegisterPageState extends State<RegisterPage> with SingleTickerProviderSt
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                     Image.asset(
+                    Image.asset(
                       "assets/images/avatars/lion_app.png",
                       width: 120,
                       height: 120,
@@ -80,7 +85,9 @@ class _RegisterPageState extends State<RegisterPage> with SingleTickerProviderSt
                       decoration: InputDecoration(
                         labelText: "Nom complet",
                         prefixIcon: const Icon(Icons.person_outline),
-                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
                       ),
                       validator: (v) => v!.isNotEmpty ? null : "Nom requis",
                     ),
@@ -90,10 +97,13 @@ class _RegisterPageState extends State<RegisterPage> with SingleTickerProviderSt
                       decoration: InputDecoration(
                         labelText: "Email",
                         prefixIcon: const Icon(Icons.email_outlined),
-                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
                       ),
                       keyboardType: TextInputType.emailAddress,
-                      validator: (v) => v!.contains('@') ? null : "Email invalide",
+                      validator: (v) =>
+                          v!.contains('@') ? null : "Email invalide",
                     ),
                     const SizedBox(height: 16),
                     TextFormField(
@@ -102,9 +112,12 @@ class _RegisterPageState extends State<RegisterPage> with SingleTickerProviderSt
                       decoration: InputDecoration(
                         labelText: "Mot de passe",
                         prefixIcon: const Icon(Icons.lock_outline),
-                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
                       ),
-                      validator: (v) => v!.length >= 6 ? null : "6 caractères minimum",
+                      validator: (v) =>
+                          v!.length >= 6 ? null : "6 caractères minimum",
                     ),
                     const SizedBox(height: 16),
                     TextFormField(
@@ -113,20 +126,24 @@ class _RegisterPageState extends State<RegisterPage> with SingleTickerProviderSt
                       decoration: InputDecoration(
                         labelText: "Confirmer le mot de passe",
                         prefixIcon: const Icon(Icons.lock_outline),
-                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
                       ),
-                      validator: (v) => v == _passwordCtrl.text ? null : "Mots de passe différents",
+                      validator: (v) => v == _passwordCtrl.text
+                          ? null
+                          : "Mots de passe différents",
                     ),
                     const SizedBox(height: 30),
-                    ElevatedButton(
+                    GradientButton(
+                      label: "S'INSCRIRE",
                       onPressed: _register,
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.primaryBlue,
-                        foregroundColor: Colors.white,
-                        padding: const EdgeInsets.symmetric(vertical: 16),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                      borderRadius: 14,
+                      textStyle: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w900,
                       ),
-                      child: const Text("S'inscrire", style: TextStyle(fontSize: 18)),
                     ),
                     const SizedBox(height: 16),
                     TextButton(

@@ -1,6 +1,7 @@
+import 'package:afroduo/core/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 
-class StartPage extends StatefulWidget{
+class StartPage extends StatefulWidget {
   const StartPage({Key? key}) : super(key: key);
 
   @override
@@ -8,7 +9,6 @@ class StartPage extends StatefulWidget{
 }
 
 class _StartPageState extends State<StartPage> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,7 +21,12 @@ class _StartPageState extends State<StartPage> {
         // ),
       ),
       body: Padding(
-        padding: const EdgeInsets.only(left: 16.0, right: 16.0,bottom: 16,top:0),
+        padding: const EdgeInsets.only(
+          left: 16.0,
+          right: 16.0,
+          bottom: 16,
+          top: 0,
+        ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -31,25 +36,22 @@ class _StartPageState extends State<StartPage> {
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 20),
-          
-            Image.asset(  
+
+            Image.asset(
               "assets/images/avatars/lion_moulle.png",
               width: 200,
               height: 200,
             ),
             const SizedBox(height: 30),
-            ElevatedButton(
+            GradientButton(
+              label: "CONTINUER",
               onPressed: () {
                 Navigator.pushNamed(context, '/quiz');
               },
-              child: const Text("Continuer"),
             ),
-            
-            
           ],
         ),
-        )// Affiche un indicateur de chargement
-      );
+      ), // Affiche un indicateur de chargement
+    );
   }
 }
-  

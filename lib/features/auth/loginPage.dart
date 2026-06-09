@@ -1,4 +1,5 @@
 // lib/features/auth/login_page.dart
+import 'package:afroduo/core/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:afroduo/core/theme/app_colors.dart';
 
@@ -9,7 +10,8 @@ class LoginPage extends StatefulWidget {
   State<LoginPage> createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMixin {
+class _LoginPageState extends State<LoginPage>
+    with SingleTickerProviderStateMixin {
   final _formKey = GlobalKey<FormState>();
   final _emailCtrl = TextEditingController();
   final _passwordCtrl = TextEditingController();
@@ -19,7 +21,10 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
   @override
   void initState() {
     super.initState();
-    _animController = AnimationController(vsync: this, duration: const Duration(milliseconds: 800));
+    _animController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 800),
+    );
     _fadeAnim = CurvedAnimation(parent: _animController, curve: Curves.easeIn);
     _animController.forward();
   }
@@ -76,10 +81,13 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
                       decoration: InputDecoration(
                         labelText: "Email",
                         prefixIcon: const Icon(Icons.email_outlined),
-                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
                       ),
                       keyboardType: TextInputType.emailAddress,
-                      validator: (v) => v!.contains('@') ? null : "Email invalide",
+                      validator: (v) =>
+                          v!.contains('@') ? null : "Email invalide",
                     ),
                     const SizedBox(height: 20),
                     TextFormField(
@@ -88,24 +96,28 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
                       decoration: InputDecoration(
                         labelText: "Mot de passe",
                         prefixIcon: const Icon(Icons.lock_outline),
-                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
                       ),
-                      validator: (v) => v!.length >= 6 ? null : "6 caractères minimum",
+                      validator: (v) =>
+                          v!.length >= 6 ? null : "6 caractères minimum",
                     ),
                     const SizedBox(height: 30),
-                    ElevatedButton(
+                    GradientButton(
+                      label: "SE CONNECTER",
                       onPressed: _login,
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.primaryBlue,
-                        foregroundColor: Colors.white,
-                        padding: const EdgeInsets.symmetric(vertical: 16),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                      borderRadius: 14,
+                      textStyle: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w900,
                       ),
-                      child: const Text("Se connecter", style: TextStyle(fontSize: 18)),
                     ),
                     const SizedBox(height: 16),
                     TextButton(
-                      onPressed: () => Navigator.pushNamed(context, '/register'),
+                      onPressed: () =>
+                          Navigator.pushNamed(context, '/register'),
                       child: const Text(
                         "Pas encore de compte ? S'inscrire",
                         style: TextStyle(color: AppColors.primaryBlue),
