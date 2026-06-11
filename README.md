@@ -1,4 +1,4 @@
-# afroduo
+# AfroLuo
 
 A mobile application to learn an African language. The app will have a list of words and phrases in the language, along with audio recordings of native speakers pronouncing the words and phrases. The app will also have a quiz feature to help users test their knowledge of the language.
 
