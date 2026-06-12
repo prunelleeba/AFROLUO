@@ -7,6 +7,7 @@ import logging
 from app.core.config import settings
 from app.db.database import engine, Base
 from app.api.routes import auth, users, languages, lessons, quiz, progress, audio
+from app.api.routes import google_auth, password_reset
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -41,13 +42,15 @@ app.add_middleware(
 
 app.mount("/uploads", StaticFiles(directory="uploads"), name="uploads")
 
-app.include_router(auth.router,      prefix="/api/v1", tags=["Auth"])
-app.include_router(users.router,     prefix="/api/v1", tags=["Users"])
-app.include_router(languages.router, prefix="/api/v1", tags=["Languages"])
-app.include_router(lessons.router,   prefix="/api/v1", tags=["Lessons"])
-app.include_router(quiz.router,      prefix="/api/v1", tags=["Quiz"])
-app.include_router(progress.router,  prefix="/api/v1", tags=["Progress"])
-app.include_router(audio.router,     prefix="/api/v1", tags=["Audio"])
+app.include_router(auth.router,           prefix="/api/v1", tags=["Auth"])
+app.include_router(users.router,          prefix="/api/v1", tags=["Users"])
+app.include_router(languages.router,      prefix="/api/v1", tags=["Languages"])
+app.include_router(lessons.router,        prefix="/api/v1", tags=["Lessons"])
+app.include_router(quiz.router,           prefix="/api/v1", tags=["Quiz"])
+app.include_router(progress.router,       prefix="/api/v1", tags=["Progress"])
+app.include_router(audio.router,          prefix="/api/v1", tags=["Audio"])
+app.include_router(google_auth.router,    tags=["Google Auth"])
+app.include_router(password_reset.router, prefix="/api/v1", tags=["Password Reset"])
 
 
 @app.get("/", tags=["Health"])
